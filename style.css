@@ -11,21 +11,43 @@
   color: #FFFFFF;
 }
 
+/* Demonstração de uma barra de rolagem personalizada
+  * (não será visível ao menos que a largura/altura seja especificada) */
+*::-webkit-scrollbar {
+  width: 2px;
+  height: 8px;
+  background-color: transparent; /* ou que isso seja adicionado ao "caminho" da barra */
+}
+
+/* Adiciona a barra arrastável */
+*::-webkit-scrollbar-thumb {
+    background: #aaa;
+    border-radius: 1rem;
+}
+
 body {
   display: block;
   overflow-x: hidden;
+  overflow-y: auto;
   background-color: #101010;
   font-family: sans-serif;
+
+  height: 100vh;
+  width: 100vw;
+
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 }
 
 html {
-  height: 100%;
-  width: 100%;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
   max-height: 100%;
   max-width: 100%;
   min-height: 100%;
   min-width: 100%;
-  
+
   font-size: 16px;
 }
 
@@ -91,6 +113,7 @@ a > img {
 }
 
 section {
+  scroll-snap-align: start;
   position: relative;
   height: 100vh;
 }
