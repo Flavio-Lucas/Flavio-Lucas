@@ -1,0 +1,124 @@
+#home {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 750px) {
+  #home {
+    padding: 0;
+    isolation: isolate;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-end;
+  }
+
+  aside {
+    padding-left: 5rem;
+    margin-bottom: 10vh;
+  }
+
+  h1 {
+    font-size: 10vw !important;
+  }
+
+  .image-container {
+    position: absolute;
+    height: 100vh;
+    z-index: -1;
+    width: 100vw;
+  }
+
+  .image-container > .spacer {
+    min-width: 0 !important;
+  }
+
+  .image-container::before {
+    background-image: linear-gradient(0deg, #101010 0%, rgba(16, 16, 16, 0) 100%) !important;
+  }
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  align-items: start;
+  justify-content: center;
+  margin-top: -10%;
+  padding-left: 7rem;
+}
+
+h1 {
+  font-size: 7vw;
+  margin-top: 2rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+h2 {
+  font-size: 2.9vw;
+  font-weight: 700;
+}
+
+span {
+  font-size: 1.9vw;
+  font-weight: 400;
+}
+
+a.curriculum {
+  display: flex;
+  align-items: center;
+  padding: .2rem 1rem;
+  margin-top: 3rem;
+  border-radius: .5rem;
+  background-color: #EB4468;
+  border: none;
+  outline: none;
+  width: fit-content;
+  text-decoration: none;
+}
+
+.image-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: linear-gradient(90deg, #101010 40%, rgba(16, 16, 16, 0) 100%);
+}
+
+@media (min-width: 1200px) {
+  .image-container::before {
+    background-image: linear-gradient(90deg, #101010 calc(100% - 80vh), rgba(16, 16, 16, 0) 100%);
+  }
+}
+
+.image-container {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  height: 100vh;
+  z-index: -1;
+  width: 100vw;
+}
+
+.image-container .spacer {
+  min-width: 40vw;
+  height: 100%;
+}
+
+.image-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img.banner-image {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
