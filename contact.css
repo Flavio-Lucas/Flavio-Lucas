@@ -1,0 +1,32 @@
+#contact {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem 2rem 2rem 9rem;
+}
+
+#contact h1 {
+  margin-right: 15%;
+}
+
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-section > .contact-element {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.contact-element img {
+  width: 1.4rem;
+}
+
+.contact-element a {
+  font-size: 1.5rem;
+  text-decoration: none;
+}

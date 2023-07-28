@@ -11,11 +11,16 @@
   color: #FFFFFF;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
 /* Demonstração de uma barra de rolagem personalizada
   * (não será visível ao menos que a largura/altura seja especificada) */
 *::-webkit-scrollbar {
   width: 2px;
-  height: 8px;
+  height: 2px;
   background-color: transparent; /* ou que isso seja adicionado ao "caminho" da barra */
 }
 
@@ -48,7 +53,7 @@ html {
   min-height: 100%;
   min-width: 100%;
 
-  font-size: 16px;
+  font-size: 1.5vw;
 }
 
 nav {
