@@ -5,6 +5,23 @@
   padding: 2rem 2rem 2rem 9rem;
 }
 
+@media(max-width: 750px) {
+  #contact {
+    flex-direction: column;
+    padding-left: 2rem !important;
+  }
+
+  #contact h1 {
+    white-space: pre-wrap;
+    margin-right: 0  !important;
+    margin-bottom: 2rem;
+  }
+
+  #contact h1 br {
+    display: none;
+  }
+}
+
 #contact h1 {
   margin-right: 15%;
 }
@@ -15,7 +32,7 @@
   gap: 1rem;
 }
 
-.contact-section > .contact-element {
+.contact-section>.contact-element {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -23,10 +40,10 @@
 }
 
 .contact-element img {
-  width: 1.4rem;
+  width: 5vmin;
 }
 
 .contact-element a {
-  font-size: 1.5rem;
+  font-size: 4vmin;
   text-decoration: none;
 }

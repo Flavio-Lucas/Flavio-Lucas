@@ -9,11 +9,16 @@
   <link rel="stylesheet" href="./home.css">
   <link rel="stylesheet" href="./projects.css">
   <link rel="stylesheet" href="./contact.css">
+  <script src="projects.js"></script>
   <title>Flávio Lucas</title>
 </head>
 
 <body>
-  <nav id="nav">
+  <input type="checkbox" name="menu" id="menu-input">
+  
+  <img src="images/menu.svg" alt="Menu" id="menu-icon" onclick="document.getElementById('menu-input').click()">
+
+  <nav id="nav" onclick="document.getElementById('menu-input').checked = false">
     <a href="#home" class="nav-item">Home</a>
     <a href="#projects" class="nav-item">Projects</a>
     <a href="#contact" class="nav-item">Contact</a>
@@ -44,7 +49,9 @@
       <div class="info-container">
         <h1>SAMA - Ecossistema de Educação</h1>
 
-        <p>Texto descrevendo melhor sobre a plataforma sama que é um ecossistema de educação infantil mas de forma resumida, mas com texto o suficiente apra atinir as linhas necessárias para aparecer os três pontinhos a fim de testar a responsividade do layout.</p>
+        <p>Texto descrevendo melhor sobre a plataforma sama que é um ecossistema de educação infantil mas de forma
+          resumida, mas com texto o suficiente apra atinir as linhas necessárias para aparecer os três pontinhos a fim
+          de testar a responsividade do layout.</p>
       </div>
     </div>
     <div class="projects-card">
@@ -52,17 +59,16 @@
       <div class="info-container">
         <h1>NCursos - Plataforma de cursos.</h1>
 
-        <p>Texto descrevendo melhor sobre a plataforma de cursos que é o ncursos mas de forma resumida, mas com texto o suficiente apra atinir as linhas necessárias para aparecer os três pontinhos a fim de testar a responsividade do layout.</p>
+        <p>Texto descrevendo melhor sobre a plataforma de cursos que é o ncursos mas de forma resumida, mas com texto o
+          suficiente apra atinir as linhas necessárias para aparecer os três pontinhos a fim de testar a responsividade
+          do layout.</p>
       </div>
     </div>
     <div class="projects-card">projeto 3</div>
     <div class="projects-card">projeto 4</div>
   </section>
   <section id="contact">
-    <h1>
-      Entre em<br/>
-      contato<br/>
-      comigo.</h1>
+    <h1>Entre em<br /> contato<br /> comigo.</h1>
     <div class="contact-section">
       <div class="contact-element">
         <img src="images/email.svg" alt="Email Icon">

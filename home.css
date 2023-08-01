@@ -17,12 +17,20 @@
   }
 
   aside {
-    padding-left: 5rem;
+    padding-left: 2rem !important;
     margin-bottom: 10vh;
   }
 
   h1 {
-    font-size: 10vw !important;
+    font-size: 11vw !important;
+  }
+
+  h2 {
+    font-size: 7vw !important;
+  }
+  
+  span {
+    font-size: 4.5vw !important;
   }
 
   .image-container {

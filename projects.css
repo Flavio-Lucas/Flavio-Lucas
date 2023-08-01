@@ -7,10 +7,17 @@
   overflow-y: hidden;
 }
 
+@media(max-width: 750px) {
+  #projects {
+    padding-left: 2rem !important;
+  }
+}
+
 .projects-card {
   transition: all ease-in-out 250ms;
-  height: 65vh;
-  min-width: 30vw;
+  height: 91vmin;
+  max-height: 80%;
+  min-width: 61vmin;
   border-radius: 1rem;
   background-color: #50505050;
   overflow: hidden;
