@@ -85,22 +85,63 @@
   }
 }
 
-/* ── Expand button on each card ── */
-.exp-expand {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+/* ── Card top bar (shared by card expand and modal close) ── */
+.card-topbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: .4rem .75rem;
+  margin: -2.5rem -2.5rem 1.25rem -3rem;
+  border-bottom: 1px solid #1f1f1f;
+  flex-shrink: 0;
+}
+
+@media (max-width: 750px) {
+  .exp-card .card-topbar {
+    margin: -1.5rem -1.5rem .75rem -2rem;
+  }
+
+  .modal-card .card-topbar {
+    margin: -2rem -1.25rem .75rem -1.75rem;
+  }
+}
+
+/* ── Shared icon button style (expand + close) ── */
+.exp-expand,
+.modal-close {
   background: transparent;
   border: 1px solid #2a2a2a;
   border-radius: .4rem;
-  width: 2rem;
-  height: 2rem;
+  width: 1.75rem;
+  height: 1.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: border-color 200ms ease, background 200ms ease, opacity 200ms ease;
-  z-index: 1;
+}
+
+.exp-expand svg,
+.modal-close svg {
+  width: .85rem;
+  height: .85rem;
+  stroke: #555;
+  transition: stroke 200ms ease;
+}
+
+.exp-expand:hover,
+.modal-close:hover {
+  border-color: #EB4468;
+  background: rgba(235, 68, 104, 0.1);
+}
+
+.exp-expand:hover svg,
+.modal-close:hover svg {
+  stroke: #EB4468;
+}
+
+/* expand button fades in on card hover, always visible on mobile */
+.exp-expand {
   opacity: 0;
 }
 
@@ -108,35 +149,15 @@
   opacity: 1;
 }
 
-.exp-expand:hover {
-  border-color: #EB4468;
-  background: rgba(235, 68, 104, 0.1);
-}
-
-.exp-expand svg {
-  width: .9rem;
-  height: .9rem;
-  stroke: #666;
-  transition: stroke 200ms ease;
-}
-
-.exp-expand:hover svg {
-  stroke: #EB4468;
-}
-
 @media (max-width: 750px) {
   .exp-expand {
     opacity: 1 !important;
     border-color: #EB4468;
     background: rgba(235, 68, 104, 0.08);
-    width: 2.4rem;
-    height: 2.4rem;
   }
 
   .exp-expand svg {
     stroke: #EB4468;
-    width: 1rem;
-    height: 1rem;
   }
 }
 
@@ -184,45 +205,13 @@
   content: '';
   position: absolute;
   left: 0;
-  top: 2rem;
+  top: 3.2rem;
   bottom: 2rem;
   width: 3px;
   background: #EB4468;
   border-radius: 0 2px 2px 0;
 }
 
-.modal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: transparent;
-  border: 1px solid #2a2a2a;
-  border-radius: .4rem;
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: border-color 200ms ease, background 200ms ease;
-  z-index: 1;
-}
-
-.modal-close:hover {
-  border-color: #EB4468;
-  background: rgba(235, 68, 104, 0.1);
-}
-
-.modal-close svg {
-  width: .9rem;
-  height: .9rem;
-  stroke: #666;
-  transition: stroke 200ms ease;
-}
-
-.modal-close:hover svg {
-  stroke: #EB4468;
-}
 
 .modal-content {
   display: flex;
@@ -292,7 +281,7 @@
   content: '';
   position: absolute;
   left: 0;
-  top: 2rem;
+  top: 3.2rem;
   bottom: 2rem;
   width: 3px;
   background: #EB4468;
