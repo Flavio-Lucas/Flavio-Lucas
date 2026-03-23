@@ -41,137 +41,191 @@
         <img class="banner-image" src="images/zyro-image 4.png" alt="">
       </div>
     </div>
+    <button class="section-arrow" onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'})" aria-label="Next section">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
   </section>
 
   <section id="experience">
-    <div class="exp-card">
-      <div class="exp-body">
-        <div class="exp-header">
-          <span class="exp-period">February 2025 – Present</span>
-          <span class="exp-badge">Current</span>
+    <button class="exp-nav exp-nav-prev" onclick="scrollExp(-1)" aria-label="Previous">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <div class="exp-track">
+      <div class="exp-card">
+        <button class="exp-expand" onclick="openModal(this)" aria-label="Expand">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </button>
+        <div class="exp-body">
+          <div class="exp-header">
+            <span class="exp-period">February 2025 – Present</span>
+            <span class="exp-badge">Current</span>
+          </div>
+          <h1 class="exp-role">Software Developer <span>· Mid-level</span></h1>
+          <h2 class="exp-company">Problem Company</h2>
+          <span class="exp-location">New York, United States · Remote</span>
+          <ul class="exp-bullets">
+            <li>Data migration in a Python-based legacy system.</li>
+            <li>TypeScript development with React Native and Expo for cross-platform mobile applications.</li>
+            <li>Collaboration with global teams to deliver scalable solutions.</li>
+          </ul>
         </div>
-        <h1 class="exp-role">Software Developer <span>· Mid-level</span></h1>
-        <h2 class="exp-company">Problem Company</h2>
-        <span class="exp-location">New York, United States · Remote</span>
-        <ul class="exp-bullets">
-          <li>Data migration in a Python-based legacy system.</li>
-          <li>TypeScript development with React Native and Expo for cross-platform mobile applications.</li>
-          <li>Collaboration with global teams to deliver scalable solutions.</li>
-        </ul>
+        <div class="exp-tags">
+          <span>TypeScript</span>
+          <span>React Native</span>
+          <span>Expo</span>
+          <span>Redux</span>
+          <span>Python</span>
+          <span>Strapi</span>
+          <span>Git</span>
+          <span>Agile</span>
+        </div>
       </div>
-      <div class="exp-tags">
-        <span>TypeScript</span>
-        <span>React Native</span>
-        <span>Expo</span>
-        <span>Redux</span>
-        <span>Python</span>
-        <span>Strapi</span>
-        <span>Git</span>
-        <span>Agile</span>
+      <div class="exp-card">
+        <button class="exp-expand" onclick="openModal(this)" aria-label="Expand">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </button>
+        <div class="exp-body">
+          <div class="exp-header">
+            <span class="exp-period">September 2024 – November 2024</span>
+          </div>
+          <h1 class="exp-role">Full-Stack Developer <span>· Freelancer</span></h1>
+          <h2 class="exp-company">V.A. Engenharia</h2>
+          <span class="exp-location">Sorocaba, São Paulo, Brazil</span>
+          <ul class="exp-bullets">
+            <li>Developed a platform for automated contract generation with file upload, digital signing, and consultation.</li>
+            <li>Built a dynamic form in React inspired by Google Forms, using SCSS and Clean Architecture.</li>
+            <li>Developed the backend API in NestJS, integrated with PostgreSQL via TypeORM.</li>
+            <li>Implemented dynamic PDF generation with html2pdf, optimized for A4 format.</li>
+            <li>Deployed on AWS with integration to external APIs for digital signatures.</li>
+          </ul>
+        </div>
+        <div class="exp-tags">
+          <span>NestJS</span>
+          <span>React</span>
+          <span>TypeScript</span>
+          <span>PostgreSQL</span>
+          <span>TypeORM</span>
+          <span>Docker</span>
+          <span>AWS</span>
+          <span>Node.js</span>
+        </div>
+      </div>
+      <div class="exp-card">
+        <button class="exp-expand" onclick="openModal(this)" aria-label="Expand">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </button>
+        <div class="exp-body">
+          <div class="exp-header">
+            <span class="exp-period">April 2021 – August 2023</span>
+          </div>
+          <h1 class="exp-role">Full-Stack Developer <span>· Mid-level</span></h1>
+          <h2 class="exp-company">L.I.G.A – Lab for Innovation in Games and Apps</h2>
+          <span class="exp-location">Sorocaba, São Paulo, Brazil</span>
+          <ul class="exp-bullets">
+            <li>Developed and maintained web applications using Angular, React, and Node.js.</li>
+            <li>Collaborated with multidisciplinary teams to define, design, and release new features.</li>
+            <li>Implemented RESTful APIs and integrated third-party services.</li>
+            <li>Optimized applications for maximum speed and scalability.</li>
+            <li>Participated in code reviews, providing and receiving constructive feedback.</li>
+          </ul>
+        </div>
+        <div class="exp-tags">
+          <span>Angular</span>
+          <span>React</span>
+          <span>Node.js</span>
+          <span>NestJS</span>
+          <span>TypeScript</span>
+          <span>Jest</span>
+          <span>Docker</span>
+          <span>TypeORM</span>
+        </div>
+      </div>
+      <div class="exp-card">
+        <button class="exp-expand" onclick="openModal(this)" aria-label="Expand">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </button>
+        <div class="exp-body">
+          <div class="exp-header">
+            <span class="exp-period">October 2020 – April 2021</span>
+          </div>
+          <h1 class="exp-role">Full-Stack Developer <span>· Intern</span></h1>
+          <h2 class="exp-company">L.I.G.A – Lab for Innovation in Games and Apps</h2>
+          <span class="exp-location">Sorocaba, São Paulo, Brazil</span>
+          <ul class="exp-bullets">
+            <li>Assisted in developing web applications using modern frameworks and libraries.</li>
+            <li>Gained hands-on experience in both frontend and backend technologies.</li>
+            <li>Worked closely with senior developers to enhance technical skills.</li>
+            <li>Contributed to project documentation and user guides.</li>
+            <li>Assisted in troubleshooting and debugging issues efficiently.</li>
+          </ul>
+        </div>
+        <div class="exp-tags">
+          <span>Angular</span>
+          <span>React</span>
+          <span>Node.js</span>
+          <span>NestJS</span>
+          <span>TypeScript</span>
+          <span>JavaScript</span>
+          <span>Jest</span>
+          <span>Docker</span>
+        </div>
       </div>
     </div>
-    <div class="exp-card">
-      <div class="exp-body">
-        <div class="exp-header">
-          <span class="exp-period">September 2024 – November 2024</span>
-        </div>
-        <h1 class="exp-role">Full-Stack Developer <span>· Freelancer</span></h1>
-        <h2 class="exp-company">V.A. Engenharia</h2>
-        <span class="exp-location">Sorocaba, São Paulo, Brazil</span>
-        <ul class="exp-bullets">
-          <li>Developed a platform for automated contract generation with file upload, digital signing, and consultation.</li>
-          <li>Built a dynamic form in React inspired by Google Forms, using SCSS and Clean Architecture.</li>
-          <li>Developed the backend API in NestJS, integrated with PostgreSQL via TypeORM.</li>
-          <li>Implemented dynamic PDF generation with html2pdf, optimized for A4 format.</li>
-          <li>Deployed on AWS with integration to external APIs for digital signatures.</li>
-        </ul>
-      </div>
-      <div class="exp-tags">
-        <span>NestJS</span>
-        <span>React</span>
-        <span>TypeScript</span>
-        <span>PostgreSQL</span>
-        <span>TypeORM</span>
-        <span>Docker</span>
-        <span>AWS</span>
-        <span>Node.js</span>
-      </div>
-    </div>
-    <div class="exp-card">
-      <div class="exp-body">
-        <div class="exp-header">
-          <span class="exp-period">April 2021 – August 2023</span>
-        </div>
-        <h1 class="exp-role">Full-Stack Developer <span>· Mid-level</span></h1>
-        <h2 class="exp-company">L.I.G.A – Lab for Innovation in Games and Apps</h2>
-        <span class="exp-location">Sorocaba, São Paulo, Brazil</span>
-        <ul class="exp-bullets">
-          <li>Developed and maintained web applications using Angular, React, and Node.js.</li>
-          <li>Collaborated with multidisciplinary teams to define, design, and release new features.</li>
-          <li>Implemented RESTful APIs and integrated third-party services.</li>
-          <li>Optimized applications for maximum speed and scalability.</li>
-          <li>Participated in code reviews, providing and receiving constructive feedback.</li>
-        </ul>
-      </div>
-      <div class="exp-tags">
-        <span>Angular</span>
-        <span>React</span>
-        <span>Node.js</span>
-        <span>NestJS</span>
-        <span>TypeScript</span>
-        <span>Jest</span>
-        <span>Docker</span>
-        <span>TypeORM</span>
-      </div>
-    </div>
-    <div class="exp-card">
-      <div class="exp-body">
-        <div class="exp-header">
-          <span class="exp-period">October 2020 – April 2021</span>
-        </div>
-        <h1 class="exp-role">Full-Stack Developer <span>· Intern</span></h1>
-        <h2 class="exp-company">L.I.G.A – Lab for Innovation in Games and Apps</h2>
-        <span class="exp-location">Sorocaba, São Paulo, Brazil</span>
-        <ul class="exp-bullets">
-          <li>Assisted in developing web applications using modern frameworks and libraries.</li>
-          <li>Gained hands-on experience in both frontend and backend technologies.</li>
-          <li>Worked closely with senior developers to enhance technical skills.</li>
-          <li>Contributed to project documentation and user guides.</li>
-          <li>Assisted in troubleshooting and debugging issues efficiently.</li>
-        </ul>
-      </div>
-      <div class="exp-tags">
-        <span>Angular</span>
-        <span>React</span>
-        <span>Node.js</span>
-        <span>NestJS</span>
-        <span>TypeScript</span>
-        <span>JavaScript</span>
-        <span>Jest</span>
-        <span>Docker</span>
-      </div>
-    </div>
+    <button class="exp-nav exp-nav-next" onclick="scrollExp(1)" aria-label="Next">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <button class="section-arrow" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" aria-label="Next section">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
   </section>
   <section id="contact">
-    <h1>Entre em<br /> contato<br /> comigo.</h1>
+    <div class="contact-intro">
+      <h1>Get in<br><span class="contact-accent">touch.</span></h1>
+      <p class="contact-subtitle">Open to new opportunities<br>and collaborations.</p>
+    </div>
     <div class="contact-section">
-      <div class="contact-element">
-        <img src="images/email.svg" alt="Email Icon">
-        <a href="mailto:flaviolucas389@gmail.com?subject=Testando">flaviolucas389@gmail.com</a>
-      </div>
-      <div class="contact-element">
-        <img src="images/linkedin.svg" alt="Email Icon">
-        <a target="_blank" href="https://www.linkedin.com/in/fl%C3%A1vio-lucas-471981184/">Flávio Lucas</a>
-      </div>
-      <div class="contact-element">
-        <img src="images/whatsapp.svg" alt="Email Icon">
-        <a target="_blank" href="https://wa.me/5515996419578">+55 15 99641-9578</a>
-      </div>
+      <a class="contact-element" href="mailto:flaviolucas389@gmail.com">
+        <img src="images/email.svg" alt="Email">
+        <div class="contact-info">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">flaviolucas389@gmail.com</span>
+        </div>
+      </a>
+      <a class="contact-element" target="_blank" href="https://www.linkedin.com/in/developerflaviolucas/">
+        <img src="images/linkedin.svg" alt="LinkedIn">
+        <div class="contact-info">
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">developerflaviolucas</span>
+        </div>
+      </a>
+      <a class="contact-element" target="_blank" href="https://github.com/Flavio-Lucas">
+        <img src="images/github.svg" alt="GitHub">
+        <div class="contact-info">
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">Flavio-Lucas</span>
+        </div>
+      </a>
+      <a class="contact-element" target="_blank" href="https://wa.me/5515996419578">
+        <img src="images/whatsapp.svg" alt="WhatsApp">
+        <div class="contact-info">
+          <span class="contact-label">WhatsApp</span>
+          <span class="contact-value">+55 15 99641-9578</span>
+        </div>
+      </a>
     </div>
   </section>
 
+  <div id="exp-modal" aria-modal="true" role="dialog">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div class="modal-content"></div>
+    </div>
+  </div>
+
   <div id="access">
-    <a target="_blank" href="https://www.linkedin.com/in/fl%C3%A1vio-lucas-471981184/">
+    <a target="_blank" href="https://www.linkedin.com/in/developerflaviolucas/">
       <img src="images/linkedin.svg" alt="Linkedin">
     </a>
     <a target="_blank" href="https://github.com/Flavio-Lucas">
@@ -181,6 +235,34 @@
       <img src="images/email.svg" alt="Email">
     </a>
   </div>
+  <script>
+    function scrollExp(dir) {
+      const track = document.querySelector('.exp-track');
+      const card = track.querySelector('.exp-card');
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      track.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' });
+    }
+
+    function openModal(btn) {
+      const card = btn.closest('.exp-card');
+      const modal = document.getElementById('exp-modal');
+      const content = modal.querySelector('.modal-content');
+      content.innerHTML = card.querySelector('.exp-body').outerHTML + card.querySelector('.exp-tags').outerHTML;
+      modal.classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('exp-modal').classList.remove('open');
+    }
+
+    document.getElementById('exp-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
 </body>
 
 </html>
