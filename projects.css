@@ -244,7 +244,9 @@
   .modal-card {
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     max-height: 100vh;
+    max-height: 100dvh;
     border-radius: 0;
     border: none;
     padding: 2rem 1.25rem 1.5rem 1.75rem;

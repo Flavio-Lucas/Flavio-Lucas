@@ -1,5 +1,6 @@
 #home {
   height: 100vh;
+  height: 100dvh;
   width: 100vw;
   overflow: hidden;
   display: flex;
@@ -36,6 +37,7 @@
   .image-container {
     position: absolute;
     height: 100vh;
+    height: 100dvh;
     z-index: -1;
     width: 100vw;
   }
@@ -110,6 +112,7 @@ a.curriculum {
   display: flex;
   justify-content: flex-end;
   height: 100vh;
+  height: 100dvh;
   z-index: -1;
   width: 100vw;
 }
