@@ -13,6 +13,7 @@
   <script src="data/experience.js"></script>
   <script src="data/contacts.js"></script>
   <script src="data/projects.js"></script>
+  <script src="data/technologies.js"></script>
   <script src="app.js" defer></script>
   <title>Flávio Lucas</title>
 </head>
@@ -33,7 +34,10 @@
       <h1>Flávio Lucas</h1>
       <h2>Full Stack Engineer</h2>
       <p class="home-tagline">I build scalable applications and<br>efficient digital experiences.</p>
-      <p class="home-stack">React · Node · Mobile</p>
+      <div class="home-stack-row">
+        <p class="home-stack">React · Node · Mobile</p>
+        <button class="home-stack-btn" onclick="openTechModal()" aria-label="Ver todas as tecnologias">+</button>
+      </div>
       <p class="home-impact">+3 years building real production-ready solutions</p>
 
       <div class="home-typing">
@@ -114,6 +118,21 @@
         </button>
       </div>
       <div class="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- ── Tech Stack modal ── -->
+  <div id="tech-modal" aria-modal="true" role="dialog">
+    <div class="tech-modal-card">
+      <div class="card-topbar">
+        <button class="modal-close" onclick="closeTechModal()" aria-label="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <h3 class="tech-modal-title">Tech Stack</h3>
+      <div class="tech-modal-content" id="tech-modal-content">
+        <!-- populated by app.js -->
+      </div>
     </div>
   </div>
 

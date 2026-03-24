@@ -4,10 +4,11 @@
 ───────────────────────────────────────────── */
 function loadData() {
   return {
-    sections:   window.SECTIONS_DATA   || [],
-    experience: window.EXPERIENCE_DATA || [],
-    contacts:   window.CONTACTS_DATA   || [],
-    projects:   window.PROJECTS_DATA   || [],
+    sections:     window.SECTIONS_DATA     || [],
+    experience:   window.EXPERIENCE_DATA   || [],
+    contacts:     window.CONTACTS_DATA     || [],
+    projects:     window.PROJECTS_DATA     || [],
+    technologies: window.TECHNOLOGIES_DATA || [],
   };
 }
 
@@ -122,6 +123,29 @@ function setupSectionArrows(activeSections) {
 }
 
 /* ─────────────────────────────────────────────
+   Tech Stack modal
+───────────────────────────────────────────── */
+function buildTechModal(technologies) {
+  const content = technologies.map(group => {
+    const chips = group.items.map(t => `<span class="tech-chip">${t}</span>`).join('');
+    return `
+      <div class="tech-group">
+        <span class="tech-group-label">${group.category}</span>
+        <div class="tech-chips">${chips}</div>
+      </div>`;
+  }).join('');
+  document.getElementById('tech-modal-content').innerHTML = content;
+}
+
+function openTechModal() {
+  document.getElementById('tech-modal').classList.add('open');
+}
+
+function closeTechModal() {
+  document.getElementById('tech-modal').classList.remove('open');
+}
+
+/* ─────────────────────────────────────────────
    Experience modal
 ───────────────────────────────────────────── */
 function openModal(btn) {
@@ -194,7 +218,7 @@ function initTypingEffect() {
    Bootstrap
 ───────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-  const { sections, experience, contacts, projects } = loadData();
+  const { sections, experience, contacts, projects, technologies } = loadData();
   const activeSections = sections.filter(s => s.active);
 
   buildNav(activeSections);
@@ -224,9 +248,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setupSectionArrows(activeSections);
   initTypingEffect();
+  buildTechModal(technologies);
 
   /* Modal event listeners */
   const modal = document.getElementById('exp-modal');
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  const techModal = document.getElementById('tech-modal');
+  techModal.addEventListener('click', e => { if (e.target === techModal) closeTechModal(); });
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeTechModal(); } });
 });
