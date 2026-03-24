@@ -9,11 +9,13 @@
   <link rel="stylesheet" href="./home.css?v=5">
   <link rel="stylesheet" href="./projects.css?v=5">
   <link rel="stylesheet" href="./contact.css?v=5">
+  <link rel="stylesheet" href="./about.css?v=1">
   <script src="data/sections.js"></script>
   <script src="data/experience.js"></script>
   <script src="data/contacts.js"></script>
   <script src="data/projects.js"></script>
   <script src="data/technologies.js"></script>
+  <script src="data/languages.js"></script>
   <script src="app.js" defer></script>
   <title>Flávio Lucas</title>
 </head>
@@ -96,6 +98,25 @@
     <button class="proj-nav proj-nav-next" onclick="scrollProj(1)" aria-label="Next">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </button>
+    <button class="go-top-btn" aria-label="Go to top">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+    <button class="section-arrow" aria-label="Next section">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+  </section>
+
+  <!-- ── About (Languages & Education) ── -->
+  <section id="about">
+    <div class="about-left">
+      <h1 class="about-title">About<span class="about-accent">.</span></h1>
+      <div id="about-edu">
+        <!-- populated by app.js -->
+      </div>
+    </div>
+    <div class="about-right" id="about-languages">
+      <!-- populated by app.js -->
+    </div>
     <button class="go-top-btn" aria-label="Go to top">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
     </button>

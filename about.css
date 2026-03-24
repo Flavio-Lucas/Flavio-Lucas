@@ -1,0 +1,203 @@
+#about {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 6rem;
+  padding: 2rem 4rem 2rem 8rem;
+  overflow: hidden;
+}
+
+@media (max-width: 750px) {
+  #about {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4rem 1.5rem 4rem !important;
+    gap: 2.25rem;
+    overflow-y: auto;
+    justify-content: flex-start;
+  }
+}
+
+/* ── Left column ── */
+.about-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  flex-shrink: 0;
+}
+
+.about-title {
+  font-size: 4.5vw;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+@media (max-width: 750px) {
+  .about-title {
+    font-size: 13vw !important;
+  }
+}
+
+.about-accent {
+  color: #EB4468;
+  font-size: inherit !important;
+  font-weight: inherit;
+}
+
+/* ── Section label ── */
+.about-section-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #EB4468;
+  margin-bottom: 0.85rem;
+}
+
+/* ── Education card ── */
+.edu-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.65rem;
+  border: 1px solid #2a2a2a;
+  background: #1a1a1a;
+  min-width: 18rem;
+  max-width: 22rem;
+}
+
+.edu-period {
+  font-size: 0.7rem;
+  color: #555;
+  letter-spacing: 0.05em;
+}
+
+.edu-degree {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.35;
+  margin-top: 0.15rem;
+}
+
+.edu-institution {
+  font-size: 0.82rem;
+  color: #aaa;
+  margin-top: 0.1rem;
+}
+
+.edu-location {
+  font-size: 0.72rem;
+  color: #555;
+}
+
+.edu-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+}
+
+.edu-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22em 0.65em;
+  border-radius: 999px;
+  border: 1px solid #303030;
+  background: transparent;
+  color: #777;
+  font-size: 0.7rem;
+  font-weight: 500;
+  transition: border-color 0.18s, color 0.18s;
+}
+
+.edu-tag:hover {
+  border-color: #EB4468;
+  color: #ccc;
+}
+
+/* ── Right column – Languages ── */
+.about-right {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.lang-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.lang-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.lang-flag {
+  font-size: 1.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 2rem;
+  text-align: center;
+}
+
+.lang-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.lang-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lang-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #e0e0e0;
+}
+
+.lang-studying {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #EB4468;
+  border: 1px solid rgba(235, 68, 104, 0.4);
+  border-radius: 999px;
+  padding: 0.1em 0.55em;
+}
+
+.lang-dots {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.lang-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #2e2e2e;
+  border: 1px solid #3a3a3a;
+  transition: background 0.2s;
+}
+
+.lang-dot.filled {
+  background: #EB4468;
+  border-color: #EB4468;
+  box-shadow: 0 0 4px rgba(235, 68, 104, 0.5);
+}
+
+.lang-level {
+  font-size: 0.68rem;
+  color: #555;
+  letter-spacing: 0.04em;
+}

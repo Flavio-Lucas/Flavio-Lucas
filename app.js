@@ -9,6 +9,7 @@ function loadData() {
     contacts:     window.CONTACTS_DATA     || [],
     projects:     window.PROJECTS_DATA     || [],
     technologies: window.TECHNOLOGIES_DATA || [],
+    languages:    window.LANGUAGES_DATA    || null,
   };
 }
 
@@ -224,10 +225,54 @@ function initTypingEffect() {
 }
 
 /* ─────────────────────────────────────────────
+   About – Languages & Education
+───────────────────────────────────────────── */
+function buildAbout(data) {
+  if (!data) return;
+
+  const langHtml = data.languages.map(lang => {
+    const dots = Array.from({ length: 5 }, (_, i) =>
+      `<span class="lang-dot${i < lang.dots ? ' filled' : ''}"></span>`
+    ).join('');
+    const studyBadge = lang.studying
+      ? '<span class="lang-studying">studying</span>'
+      : '';
+    return `
+      <div class="lang-item">
+        <span class="lang-flag">${lang.flag}</span>
+        <div class="lang-info">
+          <div class="lang-name-row">
+            <span class="lang-name">${lang.name}</span>
+            ${studyBadge}
+          </div>
+          <div class="lang-dots">${dots}</div>
+          <span class="lang-level">${lang.level}</span>
+        </div>
+      </div>`;
+  }).join('');
+
+  document.getElementById('about-languages').innerHTML = `
+    <span class="about-section-label">Languages</span>
+    <div class="lang-list">${langHtml}</div>`;
+
+  const edu = data.education;
+  const kwTags = edu.keywords.map(k => `<span class="edu-tag">${k}</span>`).join('');
+  document.getElementById('about-edu').innerHTML = `
+    <span class="about-section-label">Education</span>
+    <div class="edu-card">
+      <span class="edu-period">${edu.period}</span>
+      <h3 class="edu-degree">${edu.degree}</h3>
+      <span class="edu-institution">${edu.institution}</span>
+      <span class="edu-location">${edu.location}</span>
+      <div class="edu-tags">${kwTags}</div>
+    </div>`;
+}
+
+/* ─────────────────────────────────────────────
    Bootstrap
 ───────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-  const { sections, experience, contacts, projects, technologies } = loadData();
+  const { sections, experience, contacts, projects, technologies, languages } = loadData();
   const activeSections = sections.filter(s => s.active);
 
   buildNav(activeSections);
@@ -253,6 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  if (sections.find(s => s.id === 'about'   && s.active)) buildAbout(languages);
   if (sections.find(s => s.id === 'contact'    && s.active)) buildContact(contacts);
 
   setupSectionArrows(activeSections);
