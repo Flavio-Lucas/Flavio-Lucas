@@ -195,17 +195,17 @@
 }
 
 .lang-flag {
-  font-size: clamp(1.2rem, 1.6vw, 1.7rem);
-  line-height: 1;
   flex-shrink: 0;
   width: clamp(1.5rem, 2vw, 2rem);
-  text-align: center;
+  height: auto;
+  border-radius: 3px;
+  display: block;
+  object-fit: cover;
 }
 
 @media (max-width: 750px) {
   .lang-flag {
-    font-size: 1.5rem;
-    width: auto;
+    width: 1.75rem;
   }
 }
 

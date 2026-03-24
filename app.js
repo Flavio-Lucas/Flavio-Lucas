@@ -239,7 +239,7 @@ function buildAbout(data) {
       : '';
     return `
       <div class="lang-item">
-        <span class="lang-flag">${lang.flag}</span>
+        <img class="lang-flag" src="https://flagcdn.com/w40/${lang.flag}.png" srcset="https://flagcdn.com/w80/${lang.flag}.png 2x" alt="${lang.name} flag" loading="lazy">
         <div class="lang-info">
           <div class="lang-name-row">
             <span class="lang-name">${lang.name}</span>
