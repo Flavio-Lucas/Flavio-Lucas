@@ -157,6 +157,40 @@ function scrollProj(dir) {
 }
 
 /* ─────────────────────────────────────────────
+   Home – typing effect
+───────────────────────────────────────────── */
+function initTypingEffect() {
+  const words = ['scalable APIs', 'high-performance mobile apps', 'modern interfaces'];
+  const el = document.getElementById('typing-text');
+  if (!el) return;
+
+  let wordIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+
+  function tick() {
+    const current = words[wordIndex];
+    charIndex += deleting ? -1 : 1;
+    el.textContent = current.slice(0, charIndex);
+
+    let delay = deleting ? 45 : 75;
+
+    if (!deleting && charIndex === current.length) {
+      delay = 2200;
+      deleting = true;
+    } else if (deleting && charIndex === 0) {
+      deleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      delay = 350;
+    }
+
+    setTimeout(tick, delay);
+  }
+
+  setTimeout(tick, 800);
+}
+
+/* ─────────────────────────────────────────────
    Bootstrap
 ───────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
@@ -172,10 +206,24 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   if (sections.find(s => s.id === 'experience' && s.active)) buildExperience(experience);
-  if (sections.find(s => s.id === 'projects'   && s.active)) buildProjects(projects);
+
+  const projectsActive = sections.find(s => s.id === 'projects' && s.active);
+  if (projectsActive) buildProjects(projects);
+  const viewProjectsBtn = document.querySelector('.cta-primary[href="#projects"]');
+  if (viewProjectsBtn) {
+    if (projectsActive) {
+      viewProjectsBtn.href = '#projects';
+      viewProjectsBtn.textContent = 'View Projects';
+    } else {
+      viewProjectsBtn.href = '#experience';
+      viewProjectsBtn.textContent = 'View Experience';
+    }
+  }
+
   if (sections.find(s => s.id === 'contact'    && s.active)) buildContact(contacts);
 
   setupSectionArrows(activeSections);
+  initTypingEffect();
 
   /* Modal event listeners */
   const modal = document.getElementById('exp-modal');

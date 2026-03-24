@@ -1,7 +1,7 @@
 window.PROJECTS_DATA = [
   {
-    "name": "Sama – Ecossistema de Ensino",
-    "description": "Plataforma onde professores de ensino infantil e fundamental podem disponibilizar conteúdos para alunos e avisos para os pais. Participei principalmente no desenvolvimento do frontend e integrações com o backend.",
+    "name": "Sama – Teaching Ecosystem",
+    "description": "Platform where early and elementary school teachers can share content with students and send announcements to parents. I was primarily involved in frontend development and backend integrations.",
     "images": [
       "projects/sama/unnamed.webp",
       "projects/sama/unnamed (1).webp",
@@ -12,7 +12,7 @@ window.PROJECTS_DATA = [
   },
   {
     "name": "Tintim",
-    "description": "Projeto desenvolvido durante minha atuação no L.I.G.A, focado em soluções inovadoras para o público infantil.",
+    "description": "Project developed during my time at L.I.G.A, focused on innovative solutions for young children.",
     "images": [
       "projects/tintim/unnamed.webp",
       "projects/tintim/unnamed (1).webp"
@@ -22,7 +22,7 @@ window.PROJECTS_DATA = [
   },
   {
     "name": "nCursos",
-    "description": "Plataforma de cursos online com foco em acessibilidade e facilidade de uso.",
+    "description": "Online course platform focused on accessibility and ease of use.",
     "images": [
       "projects/ncursos/ncursos-1.png",
       "projects/ncursos/ncursos-2.png"
