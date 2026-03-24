@@ -23,7 +23,11 @@
 <body>
   <input type="checkbox" name="menu" id="menu-input">
 
-  <img src="images/menu.svg" alt="Menu" id="menu-icon" onclick="document.getElementById('menu-input').click()">
+  <label for="menu-input" id="menu-icon" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
 
   <nav id="nav" onclick="document.getElementById('menu-input').checked = false">
     <!-- populated by app.js -->
