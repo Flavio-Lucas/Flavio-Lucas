@@ -107,17 +107,26 @@ function buildContact(contacts) {
    Section arrows – always point to the next active section
 ───────────────────────────────────────────── */
 function setupSectionArrows(activeSections) {
+  const firstId = activeSections[0]?.id;
+
   activeSections.forEach((section, i) => {
     const el = document.getElementById(section.id);
     if (!el) return;
+
     const arrow = el.querySelector('.section-arrow');
-    if (!arrow) return;
-    const next = activeSections[i + 1];
-    if (next) {
-      arrow.onclick = () => document.getElementById(next.id).scrollIntoView({ behavior: 'smooth' });
-      arrow.style.display = '';
-    } else {
-      arrow.style.display = 'none';
+    if (arrow) {
+      const next = activeSections[i + 1];
+      if (next) {
+        arrow.onclick = () => document.getElementById(next.id).scrollIntoView({ behavior: 'smooth' });
+        arrow.style.display = '';
+      } else {
+        arrow.style.display = 'none';
+      }
+    }
+
+    const goTop = el.querySelector('.go-top-btn');
+    if (goTop && firstId) {
+      goTop.onclick = () => document.getElementById(firstId).scrollIntoView({ behavior: 'smooth' });
     }
   });
 }

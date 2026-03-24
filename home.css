@@ -312,13 +312,13 @@ img.banner-image {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.35rem;
-  height: 1.35rem;
+  width: 1rem;
+  height: 1rem;
   border-radius: 50%;
   border: 1.5px solid #EB4468;
   background: transparent;
   color: #EB4468;
-  font-size: 0.85rem;
+  font-size: 0.65rem;
   font-weight: 700;
   line-height: 1;
   cursor: pointer;

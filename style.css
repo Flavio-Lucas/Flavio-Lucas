@@ -207,3 +207,32 @@ section {
     opacity: 1;
   }
 }
+
+/* ── Go to top button ── */
+.go-top-btn {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 2rem;
+  background: transparent;
+  border: none;
+  padding: .25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0.45;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.go-top-btn:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+.go-top-btn svg {
+  width: 1rem;
+  height: 1rem;
+  stroke: #EB4468;
+  filter: drop-shadow(0 0 5px rgba(235, 68, 104, 0.55));
+}
