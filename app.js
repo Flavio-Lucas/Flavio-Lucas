@@ -1,0 +1,184 @@
+/* ─────────────────────────────────────────────
+   Data — loaded from data/*.js scripts in index.html
+   (window.SECTIONS_DATA, EXPERIENCE_DATA, CONTACTS_DATA, PROJECTS_DATA)
+───────────────────────────────────────────── */
+function loadData() {
+  return {
+    sections:   window.SECTIONS_DATA   || [],
+    experience: window.EXPERIENCE_DATA || [],
+    contacts:   window.CONTACTS_DATA   || [],
+    projects:   window.PROJECTS_DATA   || [],
+  };
+}
+
+/* ─────────────────────────────────────────────
+   Nav
+───────────────────────────────────────────── */
+function buildNav(activeSections) {
+  const nav = document.getElementById('nav');
+  nav.innerHTML = activeSections
+    .map(s => `<a href="#${s.id}" class="nav-item">${s.label}</a>`)
+    .join('');
+}
+
+/* ─────────────────────────────────────────────
+   Experience
+───────────────────────────────────────────── */
+const EXPAND_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>`;
+
+function buildExpCard(exp) {
+  const badge   = exp.current ? '<span class="exp-badge">Current</span>' : '';
+  const bullets = exp.bullets.map(b => `<li>${b}</li>`).join('');
+  const tags    = exp.tags.map(t => `<span>${t}</span>`).join('');
+
+  return `
+    <div class="exp-card">
+      <div class="card-topbar">
+        <button class="exp-expand" onclick="openModal(this)" aria-label="Expand">${EXPAND_SVG}</button>
+      </div>
+      <div class="exp-body">
+        <div class="exp-header">
+          <span class="exp-period">${exp.period}</span>
+          ${badge}
+        </div>
+        <h1 class="exp-role">${exp.role} <span>· ${exp.level}</span></h1>
+        <h2 class="exp-company">${exp.company}</h2>
+        <span class="exp-location">${exp.location}</span>
+        <ul class="exp-bullets">${bullets}</ul>
+      </div>
+      <div class="exp-tags">${tags}</div>
+    </div>`;
+}
+
+function buildExperience(experiences) {
+  document.getElementById('exp-track').innerHTML = experiences.map(buildExpCard).join('');
+}
+
+/* ─────────────────────────────────────────────
+   Projects
+───────────────────────────────────────────── */
+function buildProjectCard(project) {
+  const mainImage = project.images?.[0] ?? '';
+  const tags      = (project.tags ?? []).map(t => `<span>${t}</span>`).join('');
+  const link      = project.link
+    ? `<a class="project-link" href="${project.link}" target="_blank">View project ↗</a>`
+    : '';
+
+  return `
+    <div class="project-card">
+      ${mainImage ? `<div class="project-image"><img src="${mainImage}" alt="${project.name}" loading="lazy"></div>` : ''}
+      <div class="project-info">
+        <h3 class="project-name">${project.name}</h3>
+        <p class="project-description">${project.description}</p>
+        <div class="project-tags">${tags}</div>
+        ${link}
+      </div>
+    </div>`;
+}
+
+function buildProjects(projects) {
+  const track = document.getElementById('proj-track');
+  track.innerHTML = projects.length
+    ? projects.map(buildProjectCard).join('')
+    : '<p class="no-projects">No projects to display.</p>';
+}
+
+/* ─────────────────────────────────────────────
+   Contact
+───────────────────────────────────────────── */
+function buildContactItem(contact) {
+  const targetAttr = contact.newTab ? 'target="_blank"' : '';
+  return `
+    <a class="contact-element" ${targetAttr} href="${contact.href}">
+      <img src="${contact.icon}" alt="${contact.label}">
+      <div class="contact-info">
+        <span class="contact-label">${contact.label}</span>
+        <span class="contact-value">${contact.value}</span>
+      </div>
+    </a>`;
+}
+
+function buildContact(contacts) {
+  document.getElementById('contact-section').innerHTML = contacts.map(buildContactItem).join('');
+}
+
+/* ─────────────────────────────────────────────
+   Section arrows – always point to the next active section
+───────────────────────────────────────────── */
+function setupSectionArrows(activeSections) {
+  activeSections.forEach((section, i) => {
+    const el = document.getElementById(section.id);
+    if (!el) return;
+    const arrow = el.querySelector('.section-arrow');
+    if (!arrow) return;
+    const next = activeSections[i + 1];
+    if (next) {
+      arrow.onclick = () => document.getElementById(next.id).scrollIntoView({ behavior: 'smooth' });
+      arrow.style.display = '';
+    } else {
+      arrow.style.display = 'none';
+    }
+  });
+}
+
+/* ─────────────────────────────────────────────
+   Experience modal
+───────────────────────────────────────────── */
+function openModal(btn) {
+  const card = btn.closest('.exp-card');
+  const modal = document.getElementById('exp-modal');
+  modal.querySelector('.modal-content').innerHTML =
+    card.querySelector('.exp-body').outerHTML +
+    card.querySelector('.exp-tags').outerHTML;
+  modal.classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('exp-modal').classList.remove('open');
+}
+
+/* ─────────────────────────────────────────────
+   Experience track scroll
+───────────────────────────────────────────── */
+function scrollExp(dir) {
+  const track = document.querySelector('.exp-track');
+  const card  = track?.querySelector('.exp-card');
+  if (!card) return;
+  const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+  track.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' });
+}
+
+function scrollProj(dir) {
+  const track = document.querySelector('.proj-track');
+  const card  = track?.querySelector('.project-card');
+  if (!card) return;
+  const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+  track.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' });
+}
+
+/* ─────────────────────────────────────────────
+   Bootstrap
+───────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  const { sections, experience, contacts, projects } = loadData();
+  const activeSections = sections.filter(s => s.active);
+
+  buildNav(activeSections);
+
+  sections.forEach(section => {
+    const el = document.getElementById(section.id);
+    if (!el) return;
+    el.style.display = section.active ? '' : 'none';
+  });
+
+  if (sections.find(s => s.id === 'experience' && s.active)) buildExperience(experience);
+  if (sections.find(s => s.id === 'projects'   && s.active)) buildProjects(projects);
+  if (sections.find(s => s.id === 'contact'    && s.active)) buildContact(contacts);
+
+  setupSectionArrows(activeSections);
+
+  /* Modal event listeners */
+  const modal = document.getElementById('exp-modal');
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+});
