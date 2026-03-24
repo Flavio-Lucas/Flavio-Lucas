@@ -2,8 +2,8 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 6rem;
-  padding: 2rem 4rem 2rem 8rem;
+  gap: clamp(2rem, 5vw, 6rem);
+  padding: clamp(1rem, 2vh, 2rem) clamp(2rem, 4vw, 4rem) clamp(1rem, 2vh, 2rem) 8rem;
   overflow: hidden;
 }
 
@@ -11,8 +11,8 @@
   #about {
     flex-direction: column;
     align-items: flex-start;
-    padding: 4rem 1.5rem 4rem !important;
-    gap: 2.25rem;
+    padding: 3.5rem 1.5rem 2rem !important;
+    gap: 1.5rem;
     overflow-y: auto;
     justify-content: flex-start;
   }
@@ -22,12 +22,20 @@
 .about-left {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: clamp(0.85rem, 1.5vh, 1.75rem);
   flex-shrink: 0;
 }
 
+@media (max-width: 750px) {
+  .about-left {
+    gap: 0.9rem;
+    width: 100%;
+  }
+}
+
+/* ── Title ── */
 .about-title {
-  font-size: 4.5vw;
+  font-size: clamp(2rem, min(4.5vw, 7vh), 5rem);
   font-weight: 800;
   line-height: 1;
   white-space: nowrap;
@@ -35,7 +43,7 @@
 
 @media (max-width: 750px) {
   .about-title {
-    font-size: 13vw !important;
+    font-size: 10vw !important;
   }
 }
 
@@ -48,57 +56,66 @@
 /* ── Section label ── */
 .about-section-label {
   display: block;
-  font-size: 0.65rem;
+  font-size: clamp(0.55rem, 0.65vw, 0.7rem);
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #EB4468;
-  margin-bottom: 0.85rem;
+  margin-bottom: clamp(0.5rem, 0.8vh, 0.85rem);
 }
 
 /* ── Education card ── */
 .edu-card {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  padding: 1.25rem 1.5rem;
+  gap: clamp(0.2rem, 0.35vh, 0.3rem);
+  padding: clamp(0.85rem, 1.2vh, 1.25rem) clamp(1rem, 1.5vw, 1.5rem);
   border-radius: 0.65rem;
   border: 1px solid #2a2a2a;
   background: #1a1a1a;
-  min-width: 18rem;
-  max-width: 22rem;
+  min-width: clamp(14rem, 18vw, 22rem);
+  max-width: clamp(16rem, 22vw, 24rem);
+}
+
+@media (max-width: 750px) {
+  .edu-card {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding: 0.9rem 1.1rem;
+    gap: 0.2rem;
+  }
 }
 
 .edu-period {
-  font-size: 0.7rem;
+  font-size: clamp(0.58rem, 0.7vw, 0.72rem);
   color: #555;
   letter-spacing: 0.05em;
 }
 
 .edu-degree {
-  font-size: 0.92rem;
+  font-size: clamp(0.78rem, 0.92vw, 0.95rem);
   font-weight: 700;
   color: #fff;
   line-height: 1.35;
-  margin-top: 0.15rem;
+  margin-top: 0.1rem;
 }
 
 .edu-institution {
-  font-size: 0.82rem;
+  font-size: clamp(0.7rem, 0.82vw, 0.85rem);
   color: #aaa;
   margin-top: 0.1rem;
 }
 
 .edu-location {
-  font-size: 0.72rem;
+  font-size: clamp(0.6rem, 0.72vw, 0.75rem);
   color: #555;
 }
 
 .edu-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
-  margin-top: 0.75rem;
+  gap: 0.3rem;
+  margin-top: clamp(0.45rem, 0.7vh, 0.75rem);
 }
 
 .edu-tag {
@@ -109,7 +126,7 @@
   border: 1px solid #303030;
   background: transparent;
   color: #777;
-  font-size: 0.7rem;
+  font-size: clamp(0.58rem, 0.7vw, 0.72rem);
   font-weight: 500;
   transition: border-color 0.18s, color 0.18s;
 }
@@ -126,30 +143,83 @@
   flex-shrink: 0;
 }
 
+@media (max-width: 750px) {
+  .about-right {
+    width: 100%;
+  }
+}
+
 .lang-list {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: clamp(0.7rem, 1.1vh, 1.1rem);
+}
+
+@media (max-width: 750px) {
+  .lang-list {
+    flex-direction: row;
+    gap: 0.75rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.5rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .lang-list::-webkit-scrollbar {
+    height: 2px;
+  }
 }
 
 .lang-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: clamp(0.65rem, 1vw, 1rem);
+}
+
+@media (max-width: 750px) {
+  .lang-item {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 0.65rem;
+    padding: 0.85rem 1rem;
+    min-width: 5.5rem;
+    text-align: center;
+  }
 }
 
 .lang-flag {
-  font-size: 1.6rem;
+  font-size: clamp(1.2rem, 1.6vw, 1.7rem);
   line-height: 1;
   flex-shrink: 0;
-  width: 2rem;
+  width: clamp(1.5rem, 2vw, 2rem);
   text-align: center;
+}
+
+@media (max-width: 750px) {
+  .lang-flag {
+    font-size: 1.5rem;
+    width: auto;
+  }
 }
 
 .lang-info {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: clamp(0.12rem, 0.2vh, 0.2rem);
+}
+
+@media (max-width: 750px) {
+  .lang-info {
+    align-items: center;
+    gap: 0.25rem;
+  }
 }
 
 .lang-name-row {
@@ -158,14 +228,28 @@
   gap: 0.5rem;
 }
 
+@media (max-width: 750px) {
+  .lang-name-row {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
 .lang-name {
-  font-size: 0.92rem;
+  font-size: clamp(0.78rem, 0.92vw, 0.95rem);
   font-weight: 700;
   color: #e0e0e0;
 }
 
+@media (max-width: 750px) {
+  .lang-name {
+    font-size: 0.78rem;
+    text-align: center;
+  }
+}
+
 .lang-studying {
-  font-size: 0.6rem;
+  font-size: clamp(0.5rem, 0.6vw, 0.62rem);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -182,8 +266,8 @@
 }
 
 .lang-dot {
-  width: 0.5rem;
-  height: 0.5rem;
+  width: clamp(0.38rem, 0.5vw, 0.52rem);
+  height: clamp(0.38rem, 0.5vw, 0.52rem);
   border-radius: 50%;
   background: #2e2e2e;
   border: 1px solid #3a3a3a;
@@ -197,7 +281,7 @@
 }
 
 .lang-level {
-  font-size: 0.68rem;
+  font-size: clamp(0.56rem, 0.68vw, 0.7rem);
   color: #555;
   letter-spacing: 0.04em;
 }
