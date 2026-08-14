@@ -2,14 +2,21 @@ import { createClient } from '@libsql/client';
 
 let db = null;
 
+// Remove BOM (Byte Order Mark) se presente
+function stripBOM(str) {
+  if (!str) return str;
+  return str.replace(/^\uFEFF/, '');
+}
+
 export function getDB() {
   if (db) return db;
 
   // Em produção, usar Turso
-  if (process.env.TURSO_DATABASE_URL) {
+  const tursoUrl = stripBOM(process.env.TURSO_DATABASE_URL);
+  if (tursoUrl) {
     db = createClient({
-      url: process.env.TURSO_DATABASE_URL,
-      authToken: process.env.TURSO_AUTH_TOKEN,
+      url: tursoUrl,
+      authToken: stripBOM(process.env.TURSO_AUTH_TOKEN),
     });
   } else {
     // Em desenvolvimento, usar SQLite local
