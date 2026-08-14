@@ -31,5 +31,9 @@ Thumbs.db
 # Vercel
 .vercel/
 
+# API
+api/local.db
+api/*.db
+
 # Analytics data (local development)
 api/data/
