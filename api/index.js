@@ -2,9 +2,9 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import { secureHeaders } from 'hono/secure-headers';
-import { rateLimiter } from 'hono-rate-limiter';
 import { eventsRouter } from './events/index.js';
 import { healthRouter } from './health/index.js';
+import { checkRateLimit, getClientIP } from './lib/utils.js';
 
 const app = new Hono();
 
@@ -20,18 +20,14 @@ app.use('*', cors({
   maxAge: 86400,
 }));
 
-// Rate limiting
-app.use('/api/*', rateLimiter({
-  windowMs: 60 * 1000, // 1 minuto
-  max: 100, // 100 requests por IP
-  keyGenerator: (c) => {
-    // Usar X-Forwarded-For em produção, fallback para header
-    return c.req.header('x-forwarded-for') || c.req.header('x-real-ip') || 'unknown';
-  },
-  handler: (c) => {
+// Rate limiting manual
+app.use('/api/*', async (c, next) => {
+  const ip = getClientIP(c);
+  if (!checkRateLimit(ip)) {
     return c.json({ error: 'Rate limit exceeded' }, 429);
-  },
-}));
+  }
+  await next();
+});
 
 // Rotas
 app.route('/api/events', eventsRouter);
