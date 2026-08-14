@@ -1,11 +1,19 @@
 import { Hono } from 'hono';
-import { getDB, initDB } from '../lib/db.js';
+import { getDB } from '../lib/db.js';
 import { hashIP, sanitizeUserAgent, getClientIP, checkRateLimit } from '../lib/utils.js';
 
 export const eventsRouter = new Hono();
 
 // POST /api/events - Registrar evento
 eventsRouter.post('/', async (c) => {
+  // Verificar se database está configurado
+  if (!process.env.TURSO_DATABASE_URL) {
+    return c.json({
+      error: 'Database not configured',
+      message: 'Events API requires TURSO_DATABASE_URL environment variable',
+    }, 503);
+  }
+
   try {
     // Rate limit check
     const ip = getClientIP(c);
@@ -65,8 +73,16 @@ eventsRouter.post('/', async (c) => {
   }
 });
 
-// GET /api/events/stats - Estatísticas básicas (protegido futuramente)
+// GET /api/events/stats - Estatísticas básicas
 eventsRouter.get('/stats', async (c) => {
+  // Verificar se database está configurado
+  if (!process.env.TURSO_DATABASE_URL) {
+    return c.json({
+      error: 'Database not configured',
+      message: 'Stats API requires TURSO_DATABASE_URL environment variable',
+    }, 503);
+  }
+
   try {
     const db = getDB();
 
