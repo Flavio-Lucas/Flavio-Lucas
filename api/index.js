@@ -1,4 +1,4 @@
-import { Hono } from 'hono';
+import { OpenAPIHono } from '@hono/zod-openapi';
 import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import { secureHeaders } from 'hono/secure-headers';
@@ -7,7 +7,7 @@ import { eventsRouter } from './events/index.js';
 import { healthRouter } from './health/index.js';
 import { checkRateLimit, getClientIP } from './lib/utils.js';
 
-const app = new Hono();
+const app = new OpenAPIHono();
 
 // Middleware global
 app.use('*', logger());
