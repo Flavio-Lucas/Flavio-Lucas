@@ -5,9 +5,13 @@ import { secureHeaders } from 'hono/secure-headers';
 import { swaggerUI } from '@hono/swagger-ui';
 import { eventsRouter } from './events/index.js';
 import { healthRouter } from './health/index.js';
+import { authRouter } from './auth/login.js';
+import { dashboardRouter } from './dashboard/index.js';
+import { authMiddleware } from './auth/index.js';
 import { checkRateLimit, getClientIP } from './lib/utils.js';
 
 const app = new OpenAPIHono();
+const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-change-in-production';
 
 // Middleware global
 app.use('*', logger());
@@ -17,7 +21,7 @@ app.use('*', secureHeaders());
 app.use('*', cors({
   origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
   allowMethods: ['GET', 'POST', 'OPTIONS'],
-  allowHeaders: ['Content-Type'],
+  allowHeaders: ['Content-Type', 'Authorization'],
   maxAge: 86400,
 }));
 
@@ -35,7 +39,7 @@ app.doc('/api/docs', {
   openapi: '3.0.0',
   info: {
     title: 'Portfólio API',
-    version: '1.0.0',
+    version: '1.1.0',
     description: 'API para analytics e health check do portfólio',
     contact: {
       name: 'Flavio Lucas',
@@ -51,9 +55,14 @@ app.doc('/api/docs', {
 // Swagger UI
 app.get('/api/docs/ui', swaggerUI({ url: '/api/docs' }));
 
-// Rotas
+// Rotas públicas
 app.route('/api/events', eventsRouter);
 app.route('/api/health', healthRouter);
+app.route('/api/auth', authRouter);
+
+// Rotas protegidas (dashboard)
+app.use('/api/dashboard/*', authMiddleware(JWT_SECRET));
+app.route('/api/dashboard', dashboardRouter);
 
 // 404 handler
 app.notFound((c) => {

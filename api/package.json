@@ -1,6 +1,6 @@
 {
   "name": "flavio-lucas-api",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "API para portfólio - Analytics e Health Check",
   "type": "module",
   "scripts": {
