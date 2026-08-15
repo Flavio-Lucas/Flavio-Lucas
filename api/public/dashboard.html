@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Portfólio Analytics</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg: #0a0a0a;
+      --surface: #1a1a1a;
+      --surface-2: #252525;
+      --border: #333;
+      --text: #fff;
+      --text-muted: #888;
+      --accent: #00ff88;
+      --accent-dim: #00cc6a;
+      --error: #ff4444;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .login-box {
+      background: var(--surface);
+      padding: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      width: 100%;
+      max-width: 400px;
+    }
+    
+    .login-box h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    
+    .login-box p {
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    
+    .form-group {
+      margin-bottom: 16px;
+    }
+    
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 14px;
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .btn:hover {
+      background: var(--accent-dim);
+    }
+    
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .error-msg {
+      color: var(--error);
+      font-size: 14px;
+      margin-top: 12px;
+      display: none;
+    }
+    
+    .dashboard {
+      display: none;
+      padding: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .dashboard.active {
+      display: block;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    
+    .header h1 {
+      font-size: 28px;
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    
+    .version-badge {
+      background: var(--surface-2);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    
+    .btn-logout {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .btn-logout:hover {
+      color: var(--text);
+      border-color: var(--text-muted);
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    
+    .stat-card {
+      background: var(--surface);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    
+    .stat-card .label {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    
+    .stat-card .value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    
+    .stat-card .sublabel {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    
+    .chart-card {
+      background: var(--surface);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    
+    .chart-card h3 {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: var(--text-muted);
+    }
+    
+    .bar-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .bar-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .bar-label {
+      width: 120px;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    
+    .bar-container {
+      flex: 1;
+      height: 24px;
+      background: var(--surface-2);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .bar-fill {
+      height: 100%;
+      background: var(--accent);
+      transition: width 0.5s ease;
+      min-width: 2px;
+    }
+    
+    .bar-value {
+      width: 50px;
+      text-align: right;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    
+    .daily-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 150px;
+      padding-top: 20px;
+    }
+    
+    .daily-bar {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .daily-bar-fill {
+      width: 100%;
+      background: var(--accent);
+      border-radius: 4px 4px 0 0;
+      transition: height 0.5s ease;
+      min-height: 2px;
+    }
+    
+    .daily-bar-label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    
+    .daily-bar-value {
+      font-size: 11px;
+      font-weight: 600;
+    }
+    
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+      color: var(--text-muted);
+    }
+    
+    .spinner {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 12px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    @media (max-width: 768px) {
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Login -->
+  <div class="login-container" id="login-container">
+    <div class="login-box">
+      <h1>📊 Dashboard</h1>
+      <p>Analytics do portfólio</p>
+      <form id="login-form">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" required placeholder="seu@email.com">
+        </div>
+        <div class="form-group">
+          <label>Senha</label>
+          <input type="password" id="password" required placeholder="••••••">
+        </div>
+        <button type="submit" class="btn" id="login-btn">Entrar</button>
+        <p class="error-msg" id="error-msg"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard" id="dashboard">
+    <div class="header">
+      <h1>📊 Analytics</h1>
+      <div class="header-actions">
+        <span class="version-badge">v1.1.0</span>
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </div>
+    </div>
+
+    <div class="stats-grid" id="stats-grid">
+      <div class="stat-card">
+        <div class="label">Total de Visitas</div>
+        <div class="value" id="stat-total">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Últimas 24h</div>
+        <div class="value" id="stat-24h">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Últimos 7 dias</div>
+        <div class="value" id="stat-7d">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Visitantes Únicos (7d)</div>
+        <div class="value" id="stat-unique">-</div>
+      </div>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>📅 Visitas por Dia (7 dias)</h3>
+        <div class="daily-chart" id="daily-chart">
+          <div class="loading"><div class="spinner"></div>Carregando...</div>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <h3>📄 Top Páginas</h3>
+        <div class="bar-chart" id="pages-chart">
+          <div class="loading"><div class="spinner"></div>Carregando...</div>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <h3>📈 Eventos por Tipo</h3>
+        <div class="bar-chart" id="events-chart">
+          <div class="loading"><div class="spinner"></div>Carregando...</div>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <h3>🔗 Referrers</h3>
+        <div class="bar-chart" id="referrers-chart">
+          <div class="loading"><div class="spinner"></div>Carregando...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'https://api-7g2ijb9xi-flavio-lucas-projects-ad5e726c.vercel.app';
+    let token = localStorage.getItem('dashboard_token');
+
+    // Verificar se já está logado
+    if (token) {
+      verifyToken();
+    }
+
+    // Login
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const btn = document.getElementById('login-btn');
+      const error = document.getElementById('error-msg');
+
+      btn.disabled = true;
+      btn.textContent = 'Entrando...';
+      error.style.display = 'none';
+
+      try {
+        const res = await fetch(`${API_URL}/api/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || 'Erro ao fazer login');
+        }
+
+        token = data.token;
+        localStorage.setItem('dashboard_token', token);
+        showDashboard();
+      } catch (err) {
+        error.textContent = err.message;
+        error.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Entrar';
+      }
+    });
+
+    async function verifyToken() {
+      try {
+        const res = await fetch(`${API_URL}/api/auth/verify`, {
+          headers: { 'Authorization': `Bearer ${token}` },
+        });
+
+        if (res.ok) {
+          showDashboard();
+        } else {
+          localStorage.removeItem('dashboard_token');
+          token = null;
+        }
+      } catch {
+        localStorage.removeItem('dashboard_token');
+        token = null;
+      }
+    }
+
+    function showDashboard() {
+      document.getElementById('login-container').style.display = 'none';
+      document.getElementById('dashboard').classList.add('active');
+      loadDashboard();
+    }
+
+    function logout() {
+      token = null;
+      localStorage.removeItem('dashboard_token');
+      document.getElementById('login-container').style.display = 'flex';
+      document.getElementById('dashboard').classList.remove('active');
+    }
+
+    async function loadDashboard() {
+      try {
+        const res = await fetch(`${API_URL}/api/dashboard`, {
+          headers: { 'Authorization': `Bearer ${token}` },
+        });
+
+        if (!res.ok) throw new Error('Erro ao carregar dados');
+
+        const data = await res.json();
+        renderStats(data.summary);
+        renderDailyChart(data.daily);
+        renderBarChart('pages-chart', data.topPages, 'page', 'count');
+        renderBarChart('events-chart', data.byType, 'event', 'count');
+        renderBarChart('referrers-chart', data.referrers, 'referrer', 'count');
+      } catch (err) {
+        console.error('Dashboard error:', err);
+      }
+    }
+
+    function renderStats(summary) {
+      document.getElementById('stat-total').textContent = summary.total.toLocaleString();
+      document.getElementById('stat-24h').textContent = summary.last24h.toLocaleString();
+      document.getElementById('stat-7d').textContent = summary.last7d.toLocaleString();
+      document.getElementById('stat-unique').textContent = summary.uniqueVisitors.toLocaleString();
+    }
+
+    function renderDailyChart(daily) {
+      const container = document.getElementById('daily-chart');
+      
+      if (!daily || daily.length === 0) {
+        container.innerHTML = '<div class="loading">Sem dados ainda</div>';
+        return;
+      }
+
+      const max = Math.max(...daily.map(d => d.count), 1);
+      
+      container.innerHTML = daily.reverse().map(d => {
+        const height = (d.count / max) * 120;
+        const date = new Date(d.date);
+        const label = date.toLocaleDateString('pt-BR', { weekday: 'short' });
+        return `
+          <div class="daily-bar">
+            <div class="daily-bar-value">${d.count}</div>
+            <div class="daily-bar-fill" style="height: ${height}px"></div>
+            <div class="daily-bar-label">${label}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderBarChart(containerId, data, labelKey, valueKey) {
+      const container = document.getElementById(containerId);
+      
+      if (!data || data.length === 0) {
+        container.innerHTML = '<div class="loading">Sem dados ainda</div>';
+        return;
+      }
+
+      const max = Math.max(...data.map(d => d[valueKey]), 1);
+      
+      container.innerHTML = data.map(d => {
+        const width = (d[valueKey] / max) * 100;
+        const label = d[labelKey] || 'N/A';
+        return `
+          <div class="bar-item">
+            <div class="bar-label" title="${label}">${label}</div>
+            <div class="bar-container">
+              <div class="bar-fill" style="width: ${width}%"></div>
+            </div>
+            <div class="bar-value">${d[valueKey]}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Auto-refresh a cada 30 segundos
+    if (token) {
+      setInterval(() => {
+        if (document.getElementById('dashboard').classList.contains('active')) {
+          loadDashboard();
+        }
+      }, 30000);
+    }
+  </script>
+</body>
+</html>

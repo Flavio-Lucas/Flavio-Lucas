@@ -3,6 +3,7 @@ import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import { secureHeaders } from 'hono/secure-headers';
 import { swaggerUI } from '@hono/swagger-ui';
+import { serveStatic } from '@hono/node-server/serve-static';
 import { eventsRouter } from './events/index.js';
 import { healthRouter } from './health/index.js';
 import { authRouter } from './auth/login.js';
@@ -54,6 +55,9 @@ app.doc('/api/docs', {
 
 // Swagger UI
 app.get('/api/docs/ui', swaggerUI({ url: '/api/docs' }));
+
+// Dashboard HTML
+app.get('/dashboard', serveStatic({ path: './public/dashboard.html' }));
 
 // Rotas públicas
 app.route('/api/events', eventsRouter);
