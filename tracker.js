@@ -1,4 +1,4 @@
-const API_URL = 'https://api-dfqllvn9b-flavio-lucas-projects-ad5e726c.vercel.app';
+const API_URL = 'https://api-7g2ijb9xi-flavio-lucas-projects-ad5e726c.vercel.app';
 
 class PortfolioTracker {
   constructor(apiUrl = API_URL) {
