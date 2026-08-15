@@ -94,7 +94,35 @@ class PortfolioTracker {
       });
     });
 
+    // Keyboard shortcut: type "admin" to open dashboard
+    this.initAdminShortcut();
+
     console.log('🎯 Portfolio Tracker initialized');
+  }
+
+  initAdminShortcut() {
+    let buffer = '';
+    const target = 'admin';
+    const dashboardUrl = 'https://api-nob5txr4h-flavio-lucas-projects-ad5e726c.vercel.app/dashboard';
+
+    document.addEventListener('keydown', (e) => {
+      // Ignorar se estiver digitando em um input
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      buffer += e.key.toLowerCase();
+      
+      // Manter apenas os últimos 5 caracteres
+      if (buffer.length > target.length) {
+        buffer = buffer.slice(-target.length);
+      }
+      
+      // Verificar se digitou "admin"
+      if (buffer === target) {
+        buffer = '';
+        window.open(dashboardUrl, '_blank');
+        console.log('🔒 Dashboard opened');
+      }
+    });
   }
 }
 
