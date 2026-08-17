@@ -3,10 +3,16 @@ import { generateToken, verifyPassword } from './index.js';
 
 export const authRouter = new Hono();
 
+// Remove BOM (Byte Order Mark) se presente
+function cleanEnv(str) {
+  if (!str) return str;
+  return str.replace(/^\uFEFF/, '').trim();
+}
+
 // Credenciais (em produção, usar variáveis de ambiente)
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'flavio@flaviolucas.dev';
-const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH;
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-change-in-production';
+const ADMIN_EMAIL = cleanEnv(process.env.ADMIN_EMAIL) || 'flavio@flaviolucas.dev';
+const ADMIN_PASSWORD_HASH = cleanEnv(process.env.ADMIN_PASSWORD_HASH);
+const JWT_SECRET = cleanEnv(process.env.JWT_SECRET) || 'dev-secret-change-in-production';
 
 // POST /api/auth/login
 authRouter.post('/login', async (c) => {
@@ -18,6 +24,7 @@ authRouter.post('/login', async (c) => {
     }
     
     if (email !== ADMIN_EMAIL) {
+      console.log('Login failed: email mismatch', { provided: email, expected: ADMIN_EMAIL });
       return c.json({ error: 'Invalid credentials' }, 401);
     }
     
@@ -25,9 +32,11 @@ authRouter.post('/login', async (c) => {
     if (ADMIN_PASSWORD_HASH) {
       const valid = await verifyPassword(password, ADMIN_PASSWORD_HASH);
       if (!valid) {
+        console.log('Login failed: password hash mismatch');
         return c.json({ error: 'Invalid credentials' }, 401);
       }
     } else if (password !== 'admin123') {
+      console.log('Login failed: no hash configured, default password mismatch');
       return c.json({ error: 'Invalid credentials' }, 401);
     }
     
@@ -62,4 +71,17 @@ authRouter.get('/verify', async (c) => {
   }
   
   return c.json({ valid: true, email: payload.email });
+});
+
+// GET /api/auth/debug - Verificar configuração (temporário, remover em produção)
+authRouter.get('/debug', async (c) => {
+  return c.json({
+    emailConfigured: !!process.env.ADMIN_EMAIL,
+    passwordHashConfigured: !!process.env.ADMIN_PASSWORD_HASH,
+    passwordHashLength: process.env.ADMIN_PASSWORD_HASH?.length || 0,
+    passwordHashHasBOM: process.env.ADMIN_PASSWORD_HASH?.charCodeAt(0) === 0xFEFF,
+    passwordHashFirstChars: process.env.ADMIN_PASSWORD_HASH?.substring(0, 10) + '...',
+    jwtSecretConfigured: !!process.env.JWT_SECRET,
+    defaultEmail: 'flavio@flaviolucas.dev',
+  });
 });
