@@ -103,7 +103,7 @@ class PortfolioTracker {
   initAdminShortcut() {
     let buffer = '';
     const target = 'admin';
-    const dashboardUrl = 'https://api-j69nc4urh-flavio-lucas-projects-ad5e726c.vercel.app/dashboard';
+    const dashboardUrl = 'https://api-a0h4k7kfo-flavio-lucas-projects-ad5e726c.vercel.app/dashboard';
 
     document.addEventListener('keydown', (e) => {
       // Ignorar se estiver digitando em um input
