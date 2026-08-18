@@ -196,6 +196,20 @@ nav {
   width: var(--icon-size);
 }
 
+.version-tag {
+  font-size: 0.7rem;
+  color: #666;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  margin-top: 0.5rem;
+  cursor: default;
+  transition: color 0.2s;
+}
+
+.version-tag:hover {
+  color: #EB4468;
+}
+
 @media (max-width: 750px) {
   #access {
     display: none !important;

@@ -1,0 +1,87 @@
+import { Hono } from 'hono';
+import { generateToken, verifyPassword } from './index.js';
+
+export const authRouter = new Hono();
+
+// Remove BOM (Byte Order Mark) se presente
+function cleanEnv(str) {
+  if (!str) return str;
+  return str.replace(/^\uFEFF/, '').trim();
+}
+
+// Credenciais (em produção, usar variáveis de ambiente)
+const ADMIN_EMAIL = cleanEnv(process.env.ADMIN_EMAIL) || 'flavio@flaviolucas.dev';
+const ADMIN_PASSWORD_HASH = cleanEnv(process.env.ADMIN_PASSWORD_HASH);
+const JWT_SECRET = cleanEnv(process.env.JWT_SECRET) || 'dev-secret-change-in-production';
+
+// POST /api/auth/login
+authRouter.post('/login', async (c) => {
+  try {
+    const { email, password } = await c.req.json();
+    
+    if (!email || !password) {
+      return c.json({ error: 'Email and password required' }, 400);
+    }
+    
+    if (email !== ADMIN_EMAIL) {
+      console.log('Login failed: email mismatch', { provided: email, expected: ADMIN_EMAIL });
+      return c.json({ error: 'Invalid credentials' }, 401);
+    }
+    
+    // Se não tem hash configurado, aceitar senha padrão (apenas dev)
+    if (ADMIN_PASSWORD_HASH) {
+      const valid = await verifyPassword(password, ADMIN_PASSWORD_HASH);
+      if (!valid) {
+        console.log('Login failed: password hash mismatch');
+        return c.json({ error: 'Invalid credentials' }, 401);
+      }
+    } else if (password !== 'admin123') {
+      console.log('Login failed: no hash configured, default password mismatch');
+      return c.json({ error: 'Invalid credentials' }, 401);
+    }
+    
+    const token = generateToken({ email }, JWT_SECRET, 86400);
+    
+    return c.json({
+      token,
+      expiresIn: 86400,
+      email,
+    });
+    
+  } catch (error) {
+    console.error('Login error:', error);
+    return c.json({ error: 'Login failed' }, 500);
+  }
+});
+
+// GET /api/auth/verify - Verificar token
+authRouter.get('/verify', async (c) => {
+  const authHeader = c.req.header('Authorization');
+  
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return c.json({ valid: false }, 401);
+  }
+  
+  const token = authHeader.slice(7);
+  const { verifyToken } = await import('./index.js');
+  const payload = verifyToken(token, JWT_SECRET);
+  
+  if (!payload) {
+    return c.json({ valid: false }, 401);
+  }
+  
+  return c.json({ valid: true, email: payload.email });
+});
+
+// GET /api/auth/debug - Verificar configuração (temporário, remover em produção)
+authRouter.get('/debug', async (c) => {
+  return c.json({
+    emailConfigured: !!process.env.ADMIN_EMAIL,
+    passwordHashConfigured: !!process.env.ADMIN_PASSWORD_HASH,
+    passwordHashLength: process.env.ADMIN_PASSWORD_HASH?.length || 0,
+    passwordHashHasBOM: process.env.ADMIN_PASSWORD_HASH?.charCodeAt(0) === 0xFEFF,
+    passwordHashFirstChars: process.env.ADMIN_PASSWORD_HASH?.substring(0, 10) + '...',
+    jwtSecretConfigured: !!process.env.JWT_SECRET,
+    defaultEmail: 'flavio@flaviolucas.dev',
+  });
+});
